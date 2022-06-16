@@ -1,6 +1,6 @@
 import '../tailwind/tailwind.css'
 import type { AppProps } from 'next/app'
-import Navegation from '../Components/Navegation'
+import Navegation from '../Components/NavegationBar'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
