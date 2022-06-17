@@ -8,6 +8,8 @@ interface CaracterModalProps {
     setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
+
+
 export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps) {
     const name = useRef<string | null>(null);
     const age = useRef<string | null>(null);
