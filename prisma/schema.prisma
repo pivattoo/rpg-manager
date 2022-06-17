@@ -17,6 +17,7 @@ model Caracter {
   id         Int    @id @default(autoincrement())
   name       String
   age        String
+  image      String?
   mana       Int
   maxMana    Int
   stamina    Int
