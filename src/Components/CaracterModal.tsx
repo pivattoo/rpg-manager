@@ -14,7 +14,7 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
     const name = useRef<string | null>(null);
     const age = useRef<string | null>(null);
     const life = useRef<string | null>(null);
-    const strength = useRef<string | null>(null);
+    const stamina = useRef<string | null>(null);
     const mana = useRef<string | null>(null);
 
     const closeModal = () => {
@@ -50,8 +50,8 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
                             <TextInput type="number" setValue={(val) => life.current = val} placeholder="Vida" />
                         </div>
                         <div className="mr-2">
-                            <label>Força</label>
-                            <TextInput type="number" setValue={(val) => strength.current = val} placeholder="Força" />
+                            <label>Estâmina</label>
+                            <TextInput type="number" setValue={(val) => stamina.current = val} placeholder="Estâmina" />
                         </div>
                         <div>
                             <label>Mana</label>
