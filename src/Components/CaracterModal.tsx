@@ -1,7 +1,10 @@
 import { Dialog } from "@headlessui/react";
 import { Dispatch, SetStateAction, useRef } from "react";
+import Button from "./Button";
 import Modal from "./Modal";
 import TextInput from "./TextInput";
+import toast, { Toaster } from 'react-hot-toast';
+import { CreateCaracter } from "../services/caracterService";
 
 interface CaracterModalProps {
     isOpen: boolean,
@@ -12,10 +15,33 @@ interface CaracterModalProps {
 
 export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps) {
     const name = useRef<string | null>(null);
-    const age = useRef<string | null>(null);
-    const life = useRef<string | null>(null);
-    const stamina = useRef<string | null>(null);
-    const mana = useRef<string | null>(null);
+    const age = useRef<number>(0);
+    const life = useRef<number>(0);
+    const stamina = useRef<number>(0);
+    const mana = useRef<number>(0);
+
+    const handleSave = () => {
+        if (!name.current || age.current < 0 || life.current < 0 || stamina.current < 0 || mana.current < 0) {
+            return toast.error("Valores inválidos")
+        }
+        const payload = {
+            name: name.current,
+            age: age.current,
+            life: life.current,
+            stamina: stamina.current,
+            mana: mana.current
+        }
+        
+        toast.promise(
+            CreateCaracter(payload),
+             {
+               loading: 'Criando...',
+               success: <b>Personagem criado!</b>,
+               error: <b>Erro ao criar personagem.</b>,
+             }
+           );
+
+    }
 
     const closeModal = () => {
         setIsOpen(false)
@@ -41,23 +67,28 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
                         </div>
                         <div>
                             <label>Idade</label>
-                            <TextInput type="number" setValue={(val) => age.current = val} placeholder="Idade" />
+                            <TextInput type="number" defaultValue={String(age.current)} setValue={(val) => age.current = Number(val)} placeholder="Idade" />
                         </div>
                     </div>
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-3 pb-4">
                         <div className="mr-2">
                             <label>Vida Máxima</label>
-                            <TextInput type="number" setValue={(val) => life.current = val} placeholder="Vida" />
+                            <TextInput type="number" defaultValue={String(life.current)} setValue={(val) => life.current = Number(val)} placeholder="Vida" />
                         </div>
                         <div className="mr-2">
                             <label>Estâmina</label>
-                            <TextInput type="number" setValue={(val) => stamina.current = val} placeholder="Estâmina" />
+                            <TextInput type="number" defaultValue={String(stamina.current)} setValue={(val) => stamina.current = Number(val)} placeholder="Estâmina" />
                         </div>
                         <div>
                             <label>Mana</label>
-                            <TextInput type="number" setValue={(val) => mana.current = val} placeholder="Mana" />
+                            <TextInput type="number" defaultValue={String(mana.current)} setValue={(val) => mana.current = Number(val)} placeholder="Mana" />
                         </div>
                     </div>
+
+                    <Button
+                        text="Criar"
+                        action={() => handleSave()}
+                    />
 
                 </div>
             </div>

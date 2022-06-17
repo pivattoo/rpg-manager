@@ -1,7 +1,7 @@
 import { useState } from "react"
-import AddItemTabHeader from "../Components/AddItemTabHeader"
-import CaracterCard from "../Components/CaracterCard"
-import CaracterModal from "../Components/CaracterModal"
+import AddItemTabHeader from "../components/AddItemTabHeader"
+import CaracterCard from "../components/CaracterCard"
+import CaracterModal from "../components/CaracterModal"
 
 const CARDS = [
   { name: "Miau", age: "4", image: "https://i.pinimg.com/564x/cc/c4/06/ccc406dbafc09f3ac2f066a494af21e7.jpg" },
