@@ -26,7 +26,7 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
         }
         const payload = {
             name: name.current,
-            age: age.current,
+            age: String(age.current),
             life: life.current,
             stamina: stamina.current,
             mana: mana.current
@@ -40,11 +40,16 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
                error: <b>Erro ao criar personagem.</b>,
              }
            );
-
+           closeModal()
     }
 
     const closeModal = () => {
         setIsOpen(false)
+        name.current = null
+        age.current = 0,
+        life.current = 0,
+        stamina.current = 0,
+        mana.current = 0
     }
 
     return (

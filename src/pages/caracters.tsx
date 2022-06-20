@@ -1,16 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddItemTabHeader from "../components/AddItemTabHeader"
 import CaracterCard from "../components/CaracterCard"
 import CaracterModal from "../components/CaracterModal"
+import { GetCaracters } from "../services/caracterService"
+import { Caracter } from "../types"
 
-const CARDS = [
-  { name: "Miau", age: "4", image: "https://i.pinimg.com/564x/cc/c4/06/ccc406dbafc09f3ac2f066a494af21e7.jpg" },
-  { name: "Miau", age: "7", image: "https://i.pinimg.com/564x/c4/6e/33/c46e33f4de48e4d7d7643dd7b19a912c.jpg" },
-  { name: "Miau", age: "9", image: "https://i.pinimg.com/564x/e5/d4/c6/e5d4c638618adc393ca8701ebb1b50a2.jpg" }
-]
-
-export default function Caracter() {
+export default function CaracterPage() {
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [caracters, setCaracter] = useState<Caracter[]>([])
+
+  useEffect(() => {
+    GetCaracters().then((data) => {
+      setCaracter(data.caracters)
+    })
+  }, [])
 
   return (
     <div className="px-16 pt-4">
@@ -21,15 +24,16 @@ export default function Caracter() {
         action={() => setOpenModal(true)}
       />
       <div className="flex">
-        {CARDS.map((card, i) =>
-          <div key={i}>
-            <CaracterCard
-              name={card.name}
-              age={card.age}
-              image={card.image}
-            />
-          </div>
-        )}
+        {caracters.length > 0 &&
+          caracters.map((caracter) =>
+            <div key={caracter.id}>
+              <CaracterCard
+                name={caracter.name}
+                age={caracter.age}
+                image={caracter.image}
+              />
+            </div>
+          )}
       </div>
 
 

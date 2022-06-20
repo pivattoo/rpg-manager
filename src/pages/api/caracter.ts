@@ -14,13 +14,18 @@ export default async function handler(
   switch (method) {
     case "GET": {
       try {
-        const caracter = await prisma.caracter.findMany({
-          select:{
-            name:true
+        const caracters = await prisma.caracter.findMany({
+          select: {
+            id: true,
+            name: true,
+            age: true,
+            image: true,
+            level: true,
+            status: true
           }
         })
 
-        return res.status(200).json({ message: caracter })
+        return res.status(200).json({ caracters })
       } catch (e) {
         return res.status(400).json({ error: e })
       }
@@ -28,11 +33,23 @@ export default async function handler(
     case "POST": {
       try {
         const { body } = req
-        console.log(JSON.stringify(prisma))
-        const caracter = await prisma.caracter.create({
+
+        await prisma.caracter.create({
           data: {
-            name: 'teste',
-            age: '10'
+            name: body.name,
+            age: body.age,
+            image: body.image ? body.image : IMAGE_DEFAULT,
+            level: 1,
+            status: {
+              create: {
+                life: body.life,
+                maxLife: body.life,
+                mana: body.mana,
+                maxMana: body.mana,
+                stamina: body.stamina,
+                maxStamina: body.stamina
+              }
+            }
           }
         })
 
