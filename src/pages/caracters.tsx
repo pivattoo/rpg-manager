@@ -3,7 +3,7 @@ import AddItemTabHeader from "../components/AddItemTabHeader"
 import CaracterCard from "../components/CaracterCard"
 import CaracterModal from "../components/CaracterModal"
 import { GetCaracters } from "../services/caracterService"
-import { Caracter } from "../types"
+import { Caracter } from "../types/common"
 
 export default function CaracterPage() {
   const [openModal, setOpenModal] = useState<boolean>(false)

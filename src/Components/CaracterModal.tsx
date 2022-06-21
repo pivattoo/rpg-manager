@@ -1,5 +1,5 @@
 import { Dialog } from "@headlessui/react";
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import Modal from "./Modal";
 import TextInput from "./TextInput";
@@ -20,6 +20,7 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
     const stamina = useRef<number>(0);
     const mana = useRef<number>(0);
 
+    
     const handleSave = () => {
         if (!name.current || age.current < 0 || life.current < 0 || stamina.current < 0 || mana.current < 0) {
             return toast.error("Valores inválidos")
@@ -31,25 +32,25 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
             stamina: stamina.current,
             mana: mana.current
         }
-        
+
         toast.promise(
             CreateCaracter(payload),
-             {
-               loading: 'Criando...',
-               success: <b>Personagem criado!</b>,
-               error: <b>Erro ao criar personagem.</b>,
-             }
-           );
-           closeModal()
+            {
+                loading: 'Criando...',
+                success: <b>Personagem criado!</b>,
+                error: <b>Erro ao criar personagem.</b>,
+            }
+        );
+        closeModal()
     }
 
     const closeModal = () => {
         setIsOpen(false)
         name.current = null
         age.current = 0,
-        life.current = 0,
-        stamina.current = 0,
-        mana.current = 0
+            life.current = 0,
+            stamina.current = 0,
+            mana.current = 0
     }
 
     return (
