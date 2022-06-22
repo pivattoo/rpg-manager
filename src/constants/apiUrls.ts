@@ -1,5 +1,6 @@
 const apiUrls = {
-    caracter: "/caracter"
+    caracter: "/caracter",
+    image: "/send-image"
 }
 
 export default apiUrls;

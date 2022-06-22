@@ -7,7 +7,7 @@ interface CaracterCardProps {
 
 export default function CaracterCard({ name, age, image }: CaracterCardProps) {
     return (
-        <div className="w-64 mr-4 pt-2 h-fit rounded-md shadow-md">
+        <div className="w-64 mr-4 h-fit rounded-md shadow-md">
             <div className="px-4">
                 <div className="h-60 bg-cover bg-no-repeat bg-center rounded-xl" style={{ backgroundImage: `url(${image})` }}>
                 </div>

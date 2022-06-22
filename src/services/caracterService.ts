@@ -1,28 +1,33 @@
 import apiUrls from "../constants/apiUrls";
 import api from "../lib/api";
-import { Caracter } from "../types";
+import { Caracter } from "../types/common";
 
 type CaracterPayload = {
     name: string,
-    age: String,
+    age: string,
     life: number,
     stamina: number,
     mana: number,
-    image?: string
+    image: string | null
 }
 
-type CaracterResponse = {
+type CaractersResponse = {
     caracters: Caracter[]
 }
 
-export const GetCaracters = async():Promise<CaracterResponse> => {
-    const fetchedData = await api.get<CaracterResponse>(apiUrls.caracter)
+type CaracterResponse = {
+    caracter: Caracter
+
+}
+
+export const GetCaracters = async (): Promise<CaractersResponse> => {
+    const fetchedData = await api.get<CaractersResponse>(apiUrls.caracter)
 
     return fetchedData.data
 }
 
-export const CreateCaracter = async (payload: CaracterPayload)  => {
-    const fetchedData = await api.post(apiUrls.caracter, payload);
-  
+export const CreateCaracter = async (payload: CaracterPayload): Promise<CaracterResponse> => {
+    const fetchedData = await api.post<CaracterResponse>(apiUrls.caracter, payload);
+
     return fetchedData.data;
-  };
+};

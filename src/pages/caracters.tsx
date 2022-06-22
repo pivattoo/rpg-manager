@@ -7,11 +7,11 @@ import { Caracter } from "../types/common"
 
 export default function CaracterPage() {
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [caracters, setCaracter] = useState<Caracter[]>([])
+  const [caracters, setCaracters] = useState<Caracter[]>([])
 
   useEffect(() => {
     GetCaracters().then((data) => {
-      setCaracter(data.caracters)
+      setCaracters(data.caracters)
     })
   }, [])
 
@@ -23,10 +23,10 @@ export default function CaracterPage() {
         add_name="personagem"
         action={() => setOpenModal(true)}
       />
-      <div className="flex">
+      <div className="flex flex-wrap">
         {caracters.length > 0 &&
           caracters.map((caracter) =>
-            <div key={caracter.id}>
+            <div key={caracter.id} className="mt-4">
               <CaracterCard
                 name={caracter.name}
                 age={caracter.age}
@@ -37,7 +37,7 @@ export default function CaracterPage() {
       </div>
 
 
-      <CaracterModal isOpen={openModal} setIsOpen={setOpenModal} />
+      <CaracterModal isOpen={openModal} setIsOpen={setOpenModal} caracters={caracters} setCaracters={setCaracters}/>
     </div>
   )
 }

@@ -14,7 +14,7 @@ export type FilePresignedPostData = {
 }
 
 export type Caracter = {
-    id: string,
+    id?: string,
     name: string,
     age: string,
     level: number,
@@ -23,8 +23,8 @@ export type Caracter = {
 }
 
 export type Status = {
-    id: string,
-    caracter_id: string,
+    id?: string,
+    caracter_id?: string,
     life: number,
     maxLife: number,
     stamina: number,

@@ -5,22 +5,29 @@ import Modal from "./Modal";
 import TextInput from "./TextInput";
 import toast, { Toaster } from 'react-hot-toast';
 import { CreateCaracter } from "../services/caracterService";
+import FileInput from '../components/FileInput'
+import { Caracter } from "../types/common";
+
 
 interface CaracterModalProps {
     isOpen: boolean,
-    setIsOpen: Dispatch<SetStateAction<boolean>>
+    setIsOpen: Dispatch<SetStateAction<boolean>>,
+    caracters: Caracter[],
+    setCaracters: Dispatch<SetStateAction<Caracter[]>>
 }
 
 
 
-export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps) {
+export default function CaracterModal({ isOpen, setIsOpen, caracters, setCaracters }: CaracterModalProps) {
+    const [image, setImage] = useState<string | null>(null);
+
     const name = useRef<string | null>(null);
     const age = useRef<number>(0);
     const life = useRef<number>(0);
     const stamina = useRef<number>(0);
     const mana = useRef<number>(0);
 
-    
+
     const handleSave = () => {
         if (!name.current || age.current < 0 || life.current < 0 || stamina.current < 0 || mana.current < 0) {
             return toast.error("Valores inválidos")
@@ -28,13 +35,17 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
         const payload = {
             name: name.current,
             age: String(age.current),
+            image: image,
             life: life.current,
             stamina: stamina.current,
-            mana: mana.current
+            mana: mana.current,
         }
-
+        let newCaracters = caracters
         toast.promise(
-            CreateCaracter(payload),
+            CreateCaracter(payload).then((data) => {
+                newCaracters = [...newCaracters, data.caracter]
+                setCaracters(newCaracters)
+            }),
             {
                 loading: 'Criando...',
                 success: <b>Personagem criado!</b>,
@@ -46,6 +57,7 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
 
     const closeModal = () => {
         setIsOpen(false)
+        setImage(null)
         name.current = null
         age.current = 0,
             life.current = 0,
@@ -66,6 +78,8 @@ export default function CaracterModal({ isOpen, setIsOpen }: CaracterModalProps)
             </div>
             <div className="lg:flex mt-2 text-sm font-medium">
                 <div className="w-full">
+                    <FileInput fileURL={image} setReadFile={(file) => setImage(file.url)} />
+
                     <div className="grid grid-cols-2">
                         <div className="mr-2">
                             <label>Nome</label>

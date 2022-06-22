@@ -34,7 +34,7 @@ export default async function handler(
       try {
         const { body } = req
 
-        await prisma.caracter.create({
+        const customer = await prisma.caracter.create({
           data: {
             name: body.name,
             age: body.age,
@@ -53,9 +53,24 @@ export default async function handler(
           }
         })
 
-        return res.status(200).json({ message: 'sucess' })
+        let caracter = {
+          id: customer.id,
+          name: customer.name,
+          age: customer.age,
+          level: customer.level,
+          image: customer.image,
+          status: {
+            life: body.life,
+            maxLife: body.life,
+            mana: body.mana,
+            maxMana: body.mana,
+            stamina: body.stamina,
+            maxStamina: body.stamina
+          }
+        }
+
+        return res.status(200).json({ caracter })
       } catch (e) {
-        console.log(JSON.stringify(e))
         return res.status(400).json({ error: e })
       }
 
