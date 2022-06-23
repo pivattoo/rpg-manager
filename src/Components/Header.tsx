@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-function AddItemTabHeader({ name, add_name, edit_name, description, action }: { name: string, add_name?: string, edit_name?: string, description: string, action?: () => void }) {
+function Header({ name, add_name, edit_name, description, action }: { name: string, add_name?: string, edit_name?: string, description: string, action?: () => void }) {
     return (
         <div className='flex mb-2 lg:flex-row flex-col items-center'>
             <div className="mr-4 mb-2">
@@ -17,4 +17,4 @@ function AddItemTabHeader({ name, add_name, edit_name, description, action }: { 
     )
 }
 
-export default AddItemTabHeader;
+export default Header;

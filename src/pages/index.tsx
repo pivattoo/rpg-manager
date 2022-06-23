@@ -1,4 +1,4 @@
-
+const technologies = ["JavaScript", "Next.js", "Prisma"]
 
 export default function Home() {
   return (
@@ -10,8 +10,30 @@ export default function Home() {
           alt="RpgManager"
         />
       </div>
-      <label className="pl-2 font-semibold text-4xl">Rpg Manager</label>
+      <div className="font-semibold text-gray-800">
+        <h1 className="text-4xl pb-4">Rpg Manager</h1>
+        <label className="pl-2">Gerenciador genérico para RPGs.</label>
+        <div className="pl-2 pt-4">
+          <span>Tecnologias utilizadas no projeto:</span>
+          <div className="border-slate-200 border w-1/3 bg-white shadow rounded-md block overflow-auto">
+            <table className="table-auto w-full">
+              <thead>
+                <tr className="bg-slate-100 text-sm text-slate-800 text-left border-b border-slate-200">
+                  <th className="px-4 py-4 font-medium">Tecnologias</th>
+                </tr>
+              </thead>
+              <tbody>
+                {technologies.map(((techology, i) => (
+                  <tr key={i} className="px-4 h-8 text-base">
+                    <td className="px-4 py-2">✅{techology}</td>
+                  </tr>
 
+                )))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

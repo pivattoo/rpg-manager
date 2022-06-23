@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import AddItemTabHeader from "../components/AddItemTabHeader"
+import Header from "../components/Header"
 import CaracterCard from "../components/CaracterCard"
 import CaracterModal from "../components/CaracterModal"
 import { GetCaracters } from "../services/caracterService"
@@ -17,7 +17,7 @@ export default function CaracterPage() {
 
   return (
     <div className="px-16 pt-4">
-      <AddItemTabHeader
+      <Header
         name="Gerenciar personagens"
         description="Nesta área você pode editar e criar seus próprios personagens"
         add_name="personagem"
@@ -26,10 +26,10 @@ export default function CaracterPage() {
       <div className="flex flex-wrap">
         {caracters.length > 0 &&
           caracters.map((caracter) =>
-            <div key={caracter.id} className="mt-4">
+            <div key={caracter.id} className="mt-4" onClick={() => console.log(caracter.id)}>
               <CaracterCard
                 name={caracter.name}
-                age={caracter.age}
+                level={caracter.level}
                 image={caracter.image}
               />
             </div>
@@ -37,7 +37,7 @@ export default function CaracterPage() {
       </div>
 
 
-      <CaracterModal isOpen={openModal} setIsOpen={setOpenModal} caracters={caracters} setCaracters={setCaracters}/>
+      <CaracterModal isOpen={openModal} setIsOpen={setOpenModal} caracters={caracters} setCaracters={setCaracters} />
     </div>
   )
 }
