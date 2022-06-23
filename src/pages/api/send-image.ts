@@ -9,8 +9,6 @@ export default async function handler(
 ) {
     const { method } = req;
 
-    //extensao é usada pra formular o nome do arquivo no bucket
-    //uuid + ext
     const extension = req.query["ext"]
     if (!extension) {
         return res.status(401).json({ error: "Non-existent extension" });
@@ -35,7 +33,7 @@ export default async function handler(
                     Bucket: process.env.AWS_BUCKET,
                     Fields: {
                         key: `uploads/${randomUUID()}.${extension}`,
-                        acl: "public-read"
+                        acl: "public-read" //torna leitura publica
                     },
                     Expires: 60 * 3, // segundos, 3 minutos, deve ser o suficiente pra fazer upload
                     Conditions: [
@@ -44,10 +42,10 @@ export default async function handler(
                     ]
                 });
                 
-                res.status(200).json({ post });
+                return res.status(200).json({ post });
             } catch (e) {
                 console.error("Request error", e);
-                res.status(500).json({ error: "Error creating presigned post" });
+                return res.status(500).json({ error: "Error creating presigned post" });
             }
             break;
         default:
