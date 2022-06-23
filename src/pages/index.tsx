@@ -1,14 +1,18 @@
 const technologies = [
-  { name: "JavaScript", function: "Front-end, Back-end" },
-  { name: "Next.js", function: "Framework" },
-  { name: "Prisma", function: "ORM" }]
+  { name: "Next.js", function: "Implementação da interface e API" },
+  { name: "MySQL", function: "Banco de dados" },
+  { name: "Prisma", function: "ORM" },
+  {name: "TypeScript", function: "Tipagem para JavaScript"},
+  {name: "React", function: "Inferface"}
+
+]
 
 export default function Home() {
   return (
     <div className="grid grid-cols-2 items-center pt-8">
       <div className="flex justify-end ">
         <img
-          className="hidden lg:block h-80 w-auto"
+          className="hidden lg:block h-96 w-auto"
           src="https://i.imgur.com/H1uSjAD.png"
           alt="RpgManager"
         />

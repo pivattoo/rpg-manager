@@ -13,3 +13,13 @@ export type ButtonType = {
     action?: (...args: any[]) => void
 };
 
+export type DiceType = {
+    name: string,
+    icon: string,
+    side: number
+}
+
+export type DiceResultType = {
+    value: number,
+    type: string
+}
