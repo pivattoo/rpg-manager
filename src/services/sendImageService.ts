@@ -35,8 +35,6 @@ export const uploadFile = async (file: File): Promise<string> => {
     //pega local do arquivo pelo header retornado
     let file_location: string | null = null;
 
-    //CRIMINOSO ISSO
-    //FIXME: Cors error
     try {
         const uploaded_file_response = await api.post(presigned_post.post.url, form_data)
 
@@ -44,8 +42,7 @@ export const uploadFile = async (file: File): Promise<string> => {
             file_location = `https://${presigned_post.post.fields.bucket}.s3.amazonaws.com/${presigned_post.post.fields.key}`
         }
     } catch (_) {
-        file_location = `https://${presigned_post.post.fields.bucket}.s3.amazonaws.com/${presigned_post.post.fields.key}`
-        return file_location
+        throw FileUploadError.UPLOAD_ERROR
     }
 
     if (!file_location) {
