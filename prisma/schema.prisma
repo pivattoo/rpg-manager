@@ -13,26 +13,24 @@ generator client {
 }
 
 model Caracter {
-  id     String  @id @default(uuid()) @db.VarChar(36)
-  name   String
-  age    String
-  image  String
-  level  Int
-  status Status?
+  id          String      @id @default(uuid()) @db.VarChar(36)
+  name        String
+  description String
+  image       String
+  level       Int
+  attributes  Attributes?
 
   @@index([id])
 }
 
-model Status {
+model Attributes {
   id          String   @id @default(uuid()) @db.VarChar(36)
   caracter    Caracter @relation(fields: [caracter_id], references: [id], onDelete: Cascade)
   caracter_id String   @unique @db.VarChar(36)
-  mana        Int
-  maxMana     Int
-  stamina     Int
-  maxStamina  Int
   life        Int
   maxLife     Int
+  sanity      Int
+  maxSanity   Int
 
   @@index([id, caracter_id])
 }
