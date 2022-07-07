@@ -62,8 +62,8 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
     }
 
     const handleClick = () => {
-        if (shouldIgnoreInput) return
-
+        if (shouldIgnoreInput || !inputRef.current) return
+        
         inputRef.current.click()
     }
 
@@ -103,7 +103,7 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
     }, [fileURL])
 
     const handleReadFile = (readFile: ReadFile) => {
-        if (!readFile) return
+        if (!readFile || !readFile.file) return
 
         const lastLocalFile = localFile
         setLocalFile(readFile)
@@ -193,14 +193,9 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
                 return <img src={localFile.url} alt="Imagem"
                     className="w-full h-full max-w-xs"
                     draggable="false" />
-            case "pdf":
-                return <>
-                    <i className="fas fa-file-pdf text-indigo-500 text-5xl" />
-                    <label className="text-center text-slate-600">{localFile.file?.name ?? "Um arquivo PDF"}</label>
-                </>
             default:
                 return <>
-                    <i className="fas fa-file-alt text-indigo-500 text-5xl" />
+                    <i className="fas fa-file-alt text-gray-500 text-5xl" />
                     <label className="text-center text-slate-600">Um arquivo qualquer</label>
                 </>
         }
@@ -215,10 +210,10 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
             onDragLeave={handleDragEvent}
             onDrop={handleDrop}
             onClick={handleClick}
-            className={`${activeArea ? "border-indigo-500" : "border-indigo-200"}
+            className={`${activeArea ? "border-gray-500" : "border-gray-400"}
                         ${shouldIgnoreInput ? "cursor-default" : "cursor-pointer"}
                         min-h-[210px] relative py-4 flex justify-center items-center flex-col rounded-md border-dashed border-2 transition-colors duration-300`}>
-            <div className={`${activeArea && !localFile ? "text-indigo-200" : "text-indigo-500"} 
+            <div className={`${activeArea && !localFile ? "text-gray-500" : "text-gray-600"} 
                             ${((localFile || fileURL) && !activeArea) || shouldIgnoreInput ? "opacity-0" : "opacity-100"} 
                             w-full h-full justify-center items-center absolute flex flex-col transition-opacity duration-300 z-10`}>
                 <span className={`flex text-5xl transition-colors duration-300 my-3`}>
@@ -234,7 +229,7 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
             <div className={`${uploadingFile ? "opacity-100" : "opacity-0 pointer-events-none"} 
                             absolute transition-opacity duration-300 z-20`}>
                 <div className="flex items-center flex-col space-y-2">
-                    <p className="text-indigo-500 font-bold text-lg">Salvando arquivo</p>
+                    <p className="text-gray-600 font-bold text-lg">Salvando arquivo</p>
                     <Spinner />
                     <p className="text-slate-500">{localFile?.file?.name}</p>
                 </div>
@@ -242,10 +237,10 @@ export default function FileInput({ fileURL, setReadFile, fileType = "image", up
 
             <div className={`${errorMessage ? "opacity-100" : "opacity-0 pointer-events-none"} 
                             absolute flex justify-center items-center flex-col transition-opacity duration-300 z-30 `}>
-                <span className={`flex text-5xl text-indigo-500`}>
+                <span className={`flex text-5xl text-gray-600`}>
                     <i className="fas fa-exclamation-circle" />
                 </span>
-                <p className="text-indigo-500 font-bold text-lg">Ocorreu um erro</p>
+                <p className="text-gray-600 font-bold text-lg">Ocorreu um erro</p>
                 <p className="text-slate-700 text-base my-3 w-60 text-center">{errorMessage}</p>
                 <Button text="OK" action={() => setErrorMessage(null)} />
             </div>

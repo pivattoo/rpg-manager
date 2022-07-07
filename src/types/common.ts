@@ -13,22 +13,20 @@ export type FilePresignedPostData = {
     }
 }
 
-export type Caracter = {
+export type CaracterData = {
     id?: string,
     name: string,
     age: string,
     level: number,
     image: string
-    status: Status
+    attributes: AttributesData
 }
 
-export type Status = {
+export type AttributesData = {
     id?: string,
     caracter_id?: string,
     life: number,
     maxLife: number,
-    stamina: number,
-    maxStamina: number,
-    mana: number,
-    maxMana: number
+    sanity: number,
+    maxSanity: number
 }

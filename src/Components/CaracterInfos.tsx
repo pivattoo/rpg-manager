@@ -1,29 +1,24 @@
-import { Dispatch, SetStateAction } from "react"
-import { Caracter } from "../types/common"
+import { CaracterData } from "../types/common"
 
 interface CaracterInfosProps {
-    caracter: Caracter | null,
-    setCaracter: Dispatch<SetStateAction<Caracter | null>>
-
+    caracter: CaracterData
 }
 
-export default function CaracterInfos({ caracter, setCaracter }: CaracterInfosProps) {
+export default function CaracterInfos({caracter}: CaracterInfosProps) {
     return (
-        <div className="px-16 pt-4">
-            <div className="flex items-center mb-8">
-                <div onClick={() => setCaracter(null)} className='flex w-8 h-8 rounded-full bg-gray-200 justify-center items-center cursor-pointer text-gray-400 hover:bg-gray-400 hover:text-gray-100'>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                    </svg>                        </div>
-                <span className="pl-2 text-base font-semibold text-gray-700">Voltar</span>
-            </div>
-            {caracter ?
-                <div className="flex">
-
+            <div className="flex ">
+                <div className="ml-4">
+                    <label className="text-4xl font-bold text-gray-800">{caracter.name}</label>
+                    <div className="bg-gray-200 h-fit min-w-full text-justify px-4 py-2 rounded-lg mt-4">
+                        <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus augue ipsum, et dapibus felis dictum quis. Mauris a placerat nisl. Praesent metus nunc, hendrerit non ornare a, faucibus a neque. Phasellus suscipit mattis nisi, at ultricies justo ultrices vel.</p>
+                    </div>
+                    <div className="flex justify-center min-w-full bg-red-600 mt-1">
+                        <span className="text-white">{caracter.attributes.life}/{caracter.attributes.maxLife}</span>
+                    </div>
+                    <div className="flex justify-center min-w-full bg-blue-600 mt-1">
+                        <span className="text-white">{caracter.attributes.sanity}/{caracter.attributes.maxSanity}</span>
+                    </div>
                 </div>
-                :
-                <div>sexo2</div>
-            }
-        </div>
-    )
+            </div>
+            )
 }

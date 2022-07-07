@@ -1,22 +1,21 @@
 import apiUrls from "../constants/apiUrls";
 import api from "../lib/api";
-import { Caracter } from "../types/common";
+import { CaracterData } from "../types/common";
 
 type CaracterPayload = {
     name: string,
-    age: string,
+    description: string
     life: number,
-    stamina: number,
-    mana: number,
+    sanity: number,
     image: string | null
 }
 
 type CaractersResponse = {
-    caracters: Caracter[]
+    caracters: CaracterData[]
 }
 
 type CaracterResponse = {
-    caracter: Caracter
+    caracter: CaracterData
 
 }
 

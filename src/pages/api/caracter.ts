@@ -18,10 +18,10 @@ export default async function handler(
           select: {
             id: true,
             name: true,
-            age: true,
+            description: true,
             image: true,
             level: true,
-            status: true
+            attributes: true
           }
         })
 
@@ -37,17 +37,15 @@ export default async function handler(
         const customer = await prisma.caracter.create({
           data: {
             name: body.name,
-            age: body.age,
+            description: body.description,
             image: body.image ? body.image : IMAGE_DEFAULT,
             level: 1,
-            status: {
+            attributes: {
               create: {
                 life: body.life,
                 maxLife: body.life,
-                mana: body.mana,
-                maxMana: body.mana,
-                stamina: body.stamina,
-                maxStamina: body.stamina
+                sanity: body.sanity,
+                maxSanity: body.sanity
               }
             }
           }
@@ -56,16 +54,14 @@ export default async function handler(
         let caracter = {
           id: customer.id,
           name: customer.name,
-          age: customer.age,
+          description: customer.description,
           level: customer.level,
           image: customer.image,
-          status: {
+          attributes: {
             life: body.life,
             maxLife: body.life,
-            mana: body.mana,
-            maxMana: body.mana,
-            stamina: body.stamina,
-            maxStamina: body.stamina
+            sanity: body.sanity,
+            maxSanity: body.sanity
           }
         }
 

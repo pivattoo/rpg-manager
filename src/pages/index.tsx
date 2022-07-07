@@ -9,7 +9,7 @@ const technologies = [
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-2 items-center pt-8">
+    <div className="grid grid-cols-2 pt-8">
       <div className="flex justify-end ">
         <img
           className="hidden lg:block h-96 w-auto"
@@ -19,7 +19,10 @@ export default function Home() {
       </div>
       <div className="font-semibold text-gray-800">
         <h1 className="text-4xl pb-4">Rpg Manager</h1>
-        <label className="pl-2">Gerenciador genérico para RPGs</label>
+        <div className="flex flex-wrap max-w-sm ">
+        <label >O RPG Manager é um projeto amador desenvolvido com o propósito de estudar tecnologias, o projeto visa criar um sistema genérico para o gerenciamento de sessões de RPG, com funcionalidades basicas como rolagem de dados, sistema de PVP e PVE, gerenciamento completo de personagens, entre outras funções.</label>
+
+        </div>
         <div className="pl-2 pt-4">
           <span>Tecnologias utilizadas no projeto:</span>
           <div className="mt-2 border-gray-200 border w-2/3 bg-white shadow rounded-md block overflow-auto">
